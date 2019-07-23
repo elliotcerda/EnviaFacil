@@ -1,0 +1,30 @@
+<div class="area">
+    <div class="ui container" style="padding-top: 50px;padding-left: 80px">
+          <h1>Clientes registrados</h1>
+          <a class="ui button positive" routerLink="/NuevoCliente">Nuevo</a>
+          <table class="ui celled table">
+              <thead>
+                <tr><th>Nombre</th>
+                <th>Telefono</th>
+                <th>Dirección</th>
+                <th></th>
+              </tr></thead>
+              <tbody>
+                <tr *ngFor="let cliente of clientes" (click)="onSelect(cliente)">
+                  <td>{{cliente.nombre}}</td>
+                  <td>{{cliente.telefono}}</td>
+                  <td>{{cliente.direccion}}</td>
+                  <td>
+                    <a class="ui primary button" 
+                    routerLink="/clienteDetalles/{{cliente.id}}"> 
+                    Ver mas</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- <li *ngFor="let cliente of clientes" (click)="onSelect(cliente)"> 
+                <a routerLink="/clienteDetalles/{{cliente.id}}">{{cliente.nombre}}</a>
+            </li>   -->      
+    </div>
+</div>
+<app-menu></app-menu>

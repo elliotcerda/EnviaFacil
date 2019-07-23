@@ -1,0 +1,26 @@
+<div class="area">
+    <div class="ui container" style="padding-top: 50px;padding-left: 80px">
+        <!-- (ngSubmit)="onSubmitSave(clienteForm)" -->
+   		 <h1>Productos registrados</h1>
+          <a class="ui button positive" routerLink="/NuevoProducto">Nuevo</a>
+          <table class="ui celled table">
+              <thead>
+                <tr><th>Nombre</th>
+                <th>Codigo</th>
+                <th></th>
+              </tr></thead>
+              <tbody>
+                <tr *ngFor="let producto of productos" (click)="onSelect(producto)">
+                  <td>{{producto.nombre}}</td>
+                  <td>{{producto.codigo}}</td>
+                  <td>
+                    <a class="ui primary button" 
+                    routerLink="/productoDetalles/{{producto.id}}"> 
+                    Ver mas</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>      
+    </div>
+</div>
+<app-menu></app-menu>

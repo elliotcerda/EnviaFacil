@@ -1,0 +1,135 @@
+<div class="area">
+    <div class="ui container" style="padding-top: 50px;padding-left: 80px">
+        <!-- (ngSubmit)="onSubmitSave(clienteForm)" -->
+         <div *ngIf="isSubmitted" style="margin-bottom:  15px;">
+                    <div class="ui ignored {{message_class}} message ">
+                      {{message}}
+                    </div>   
+        </div>
+        <form class="ui form" [formGroup]="clienteForm" (ngSubmit)="onSubmitSave()">
+            <h4 class="ui diving header">
+                <div *ngIf="cliente">
+                    Cliente 
+                </div>
+                <div *ngIf="!cliente">
+                    Nuevo Cliente
+                </div>
+            </h4>
+           
+            <div class="two fields">
+                <div class="field">
+                    <label>Nombre</label>
+                    <input type="text"  
+                    formControlName="nombre"
+                    placeholder="Nombre" required>
+                    <div *ngIf="clienteForm.controls['nombre'].errors && 
+                    clienteForm.controls['nombre'].touched" style="color: red;">
+                          <div [hidden]="!clienteForm.controls['nombre'].errors.required">
+                                Ingrese un nombre.
+                          </div>                     
+                    </div>      
+                    
+                </div>
+              
+                <div class="field">
+                    <label>Teléfono</label>
+                    <input type="text" 
+                    formControlName="telefono"
+                    placeholder="Teléfono" required>
+                    <div *ngIf="clienteForm.controls['telefono'].errors && clienteForm.controls['telefono'].touched" style="color: red;">
+                        <div [hidden]="!clienteForm.controls['telefono'].errors.required">
+                            Ingrese un telefono de entre 8 y 10 caracteres.
+                        </div>                     
+                        <div [hidden]="!clienteForm.controls['telefono'].errors.minlength">
+                            Ingrese un telefono de entre 8 y 10 caracteres.
+                        </div>   
+                        <div [hidden]="!clienteForm.controls['telefono'].errors.maxlength">
+                            Ingrese un telefono de entre 8 y 10 caracteres.
+                        </div>   
+                    </div>   
+                </div>
+            </div>
+            <div class="field">
+                    <label>Dirección</label>
+                    <input type="text" 
+                    formControlName="direccion" 
+                    placeholder="Dirección"
+                    required>
+                    <div *ngIf="clienteForm.controls['direccion'].errors && clienteForm.controls['direccion'].touched" style="color: red;">
+                        <div [hidden]="!clienteForm.controls['direccion'].errors.required">
+                            Ingrese la direccion.
+                        </div>                     
+                        <div [hidden]="!clienteForm.controls['direccion'].errors.maxlength">
+                            Ingrese una dirección mas corta (200 caracteres).
+                        </div>                       
+                    </div> 
+
+            </div>
+            <h4 class="ui diving header">Usuario</h4>
+            <div class="two fields">    
+                <div class="field">
+                    <label>Usuario</label>
+                    <input type="text" 
+                    formControlName="usuario"
+                    placeholder="Usuario">
+                    <div *ngIf="clienteForm.controls['usuario'].errors &&
+                        clienteForm.controls['usuario'].touched" style="color: red;">
+                        <div [hidden]="!clienteForm.controls['usuario'].errors.required">
+                            Ingrese un usuario.
+                        </div>
+                         <div [hidden]="!clienteForm.controls['usuario'].errors.minlength">
+                            Ingrese un usuario no de entre 6 y 10 caracteres.
+                        </div>
+                        <div [hidden]="!clienteForm.controls['usuario'].errors.maxlength">
+                            Ingrese un usuario no de entre 6 y 10 caracteres.
+                        </div>    
+                        <div [hidden]="!clienteForm.controls['usuario'].errors.userExists">
+                           Ya existe el usuario.
+                        </div>        
+                        <div [hidden]="!clienteForm.controls['usuario'].errors.whitespace">
+                           No debe de contener espacios.
+                        </div>                                            
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Contraseña</label>
+                    <input type="password" 
+                    formControlName="contrasena"  
+                    placeholder="Contraseña">
+                    <div *ngIf="clienteForm.controls['contrasena'].errors &&
+                        clienteForm.controls['contrasena'].touched" style="color: red;">
+                        <div [hidden]="!clienteForm.controls['contrasena'].errors.required">
+                            Ingrese una contraseña.
+                        </div>
+                        <div [hidden]="!clienteForm.controls['contrasena'].errors.minlength">
+                            Ingrese una contraseña de entre 6 y 12 caracteres, que incluye numeros y
+                            letras.
+                        </div>
+                        <div [hidden]="!clienteForm.controls['contrasena'].errors.maxlength">
+                            Ingrese una contraseña de entre 6 y 12 caracteres, que incluye numeros y
+                            letras.
+                        </div>
+                          <div [hidden]="!clienteForm.controls['contrasena'].errors.whitespace">
+                           No debe de contener espacios.
+                        </div> 
+                    </div>
+                </div>
+            </div> 
+             <div *ngIf="cliente_id == 0">
+                <input type="submit" name="submit" 
+                    class="ui teal button "
+                    [disabled]="clienteForm.invalid"
+                    value="Guardar"> 
+            </div>
+            <div *ngIf="cliente_id != 0">
+                <input type="submit" name="submit" 
+                    [disabled]="clienteForm.invalid"
+                    class="ui teal button " value="Modificar">
+            </div>
+          <!--  [disabled]="!clienteForm.form.valid" -->
+        </form>       
+      
+        <button class="ui black right floated button " (click)="goBack()">Regresar</button>   
+    </div>
+</div>
+<app-menu></app-menu>

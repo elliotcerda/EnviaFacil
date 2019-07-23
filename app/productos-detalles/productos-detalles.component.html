@@ -1,0 +1,71 @@
+<div class="area">
+    <div class="ui container" style="padding-top: 50px;padding-left: 80px">
+        <!-- (ngSubmit)="onSubmitSave(clienteForm)" -->
+         <div *ngIf="isSubmitted" style="margin-bottom:  15px;">
+                    <div class="ui ignored {{message_class}} message ">
+                      {{message}}
+                    </div>   
+        </div>
+        <form class="ui form" [formGroup]="productoForm" (ngSubmit)="onSubmitSave()">
+            <h4 class="ui diving header">
+                <div *ngIf="cliente">
+                    Producto 
+                </div>
+                <div *ngIf="!cliente">
+                    Nuevo producto
+                </div>
+            </h4>
+           
+            <div class="two fields">
+                <div class="field">
+                    <label>Nombre</label>
+                    <input type="text"  
+                    formControlName="nombre"
+                    placeholder="Nombre" required>                
+                    
+                </div>
+                 <div class="field">
+                    <label>Descripción</label>
+                    <input type="text"  
+                    formControlName="descripcion"
+                    placeholder="Descripción" required>                                    
+                </div>  
+            </div>
+             <div class="two fields">
+                <div class="field">
+                    <label>Codigo</label>
+                    <input type="text"  
+                    formControlName="codigo"
+                    placeholder="codigo" required>                
+                    
+                </div>
+                 <div class="field">
+                    <label>Imagen</label>
+                    <input type="file"  
+                    formControlName="imagen"
+                    placeholder="Imagen" required>                                    
+                </div>                
+            </div>   
+            <div *ngIf="producto_id != 0" class="field">
+                <label>Imagen</label>
+                <img src="{{current_img_url}}" >                                    
+            </div>  
+ 
+             <div *ngIf="producto_id == 0">
+                <input type="submit" name="submit" 
+                    class="ui teal button "
+                    [disabled]="productoForm.invalid"
+                    value="Guardar"> 
+            </div>
+            <div *ngIf="producto_id != 0">
+                <input type="submit" name="submit" 
+                    [disabled]="productoForm.invalid"
+                    class="ui teal button " value="Modificar">
+            </div>
+          <!--  [disabled]="!clienteForm.form.valid" -->
+        </form>       
+      
+        <button class="ui black right floated button " (click)="goBack()">Regresar</button>   
+    </div>
+</div>
+<app-menu></app-menu>
